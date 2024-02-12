@@ -85,6 +85,7 @@ holder.addEventListener("click", (e) => {
       freeGifts.forEach((divs) => {
         divs.style.display = userPlans.bonus;
       });
+      console.log(userPlans);
       changePrice(plans, userPlans);
     } else if (userPlan.checked === false) {
       // monthly price
@@ -110,7 +111,7 @@ holder.addEventListener("click", (e) => {
     console.log(userAdds);
   } else if (e.target.matches("[data-tab-three-next-btn")) {
     holder.textContent = "";
-    holder.appendChild(functions.stepFour());
+    holder.appendChild(functions.stepFour(userPlans, userAdds));
   }
 });
 
@@ -126,6 +127,9 @@ tabs.forEach((element) => {
     } else if (tabs.indexOf(element) === 2) {
       holder.textContent = "";
       holder.appendChild(functions.stepThree(userAdds));
+    } else if (tabs.indexOf(element) === 3) {
+      holder.textContent = "";
+      holder.appendChild(functions.stepFour(userPlans, userAdds));
     }
   });
 });
