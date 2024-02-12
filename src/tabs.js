@@ -11,9 +11,9 @@ export class UserPlanData {
     this.plan = options.plan || false;
     // checkbox
     this.checkbox = options.checkbox || "";
-    this.arcade = options.arcade || "2birr";
-    this.advanced = options.advanced || "3birr";
-    this.pro = options.pro || "5birr";
+    this.arcade = options.arcade || "";
+    this.advanced = options.advanced || "";
+    this.pro = options.pro || "";
     this.bonus = options.bonus || "none";
     this.selectedPlan = options.selectedPlan || 0;
   }
@@ -42,6 +42,8 @@ export class UserServices {
   constructor(options = {}) {
     // get plan if meonthly or yearly(true is monthly set in step 2 or userdata obj)
     this.addPlan = options.addPlan || false;
+    //
+
     // checkbox value
     this.online = options.online || "";
     this.storage = options.storage || "";
@@ -105,6 +107,7 @@ const tabOne = function (obj) {
   return div;
 };
 const tabTwo = function (obj) {
+  obj.choosenPlan();
   const div = document.createElement("div");
   const plan = `
     <div class="step-two">
@@ -226,7 +229,7 @@ const tabThree = function (obj) {
   div.innerHTML = storage;
   return div;
 };
-const tabFour = function () {
+const tabFour = function (objOne, objTwo) {
   const div = document.createElement("div");
   const summary = `
     <div class="tab-four">
@@ -238,10 +241,10 @@ const tabFour = function () {
     <div class="summary-plan">
 
         <div class="plan">
-            <h2 class="selected-plan">Arcade(yearly)</h2>
+            <h2 class="selected-plan">${summaryPlan(objOne).planName}(${summaryPlan(objOne).plan})</h2>
             <button class="change-plan">change</button>
         </div>
-        <div class="summary-price">$90/yr</div>
+        <div class="summary-price">${summaryPlan(objOne).price}</div>
        
      </div>
        <hr>
@@ -249,19 +252,21 @@ const tabFour = function () {
 
             <div class="services">
             
-                <p>Online service</p>
-                <p>Larger storage</p>
+                <p> ${summaryAdds(objTwo).firstAdd} </p>
+                <p> ${summaryAdds(objTwo).secondAdd} </p>
+                <p> ${summaryAdds(objTwo).thirdAdd} </p>
                
              </div>
             <div class="service-prices">
-                <p class="online-price">+$10/yr</p>
-                <p class="storage-price">+$20/yr</p>
+                <p class="online-price">${summaryAdds(objTwo).onlinePrice}</p>
+                <p class="storage-price">${summaryAdds(objTwo).storagePrice}</p>
+                <p class="theme-price">${summaryAdds(objTwo).themePrice}</p>
             </div>
         </div>
     </div>
         <div class="summary-total">
             <p class="total-title">Total per year</p>
-            <span class="total-price">$120/yr</span>
+            <span class="total-price">${totalPrice(objOne, objTwo)}</span>
         </div>
         <div class="nav-btns">
             <button class="tab-four-btn">Go Back</button>
@@ -323,3 +328,88 @@ export function isChecked(index, domElement, obj) {
   }
 }
 // step four summary
+// userdata obj
+function summaryPlan(obj) {
+  let planName, plan, price;
+  if (obj.selectedPlan === 0) {
+    planName = "Arcade";
+    price = obj.arcade;
+  } else if (obj.selectedPlan === 1) {
+    planName = "Advanced";
+    price = obj.advanced;
+  } else if (obj.selectedPlan === 2) {
+    planName = "Pro";
+    price = obj.pro;
+  }
+  if (obj.checkbox === "checked") {
+    plan = "yearly";
+  }
+  if (obj.checkbox === "") {
+    plan = "monthly";
+  }
+
+  return {
+    planName,
+    plan,
+    price,
+  };
+}
+// useradds
+
+function summaryAdds(obj) {
+  let firstAdd, secondAdd, thirdAdd, onlinePrice, storagePrice, themePrice;
+  const selectedPrice = [];
+  if (obj.online === "checked") {
+    firstAdd = "Online service";
+    onlinePrice = obj.onlinePrice;
+    selectedPrice.push(onlinePrice);
+  }
+  if (obj.storage === "checked") {
+    secondAdd = "Larger storage";
+    storagePrice = obj.storagePrice;
+    selectedPrice.push(storagePrice);
+  }
+  if (obj.theme === "checked") {
+    thirdAdd = "Customizable profile";
+    themePrice = obj.themePrice;
+    selectedPrice.push(themePrice);
+  }
+
+  // use closure
+  const checkSelectedAdds = function (obj) {
+    if (obj.online !== "checked") {
+      firstAdd = "";
+      onlinePrice = 0;
+    }
+    if (obj.storage !== "checked") {
+      secondAdd = "";
+      storagePrice = 0;
+    }
+    if (obj.theme !== "checked") {
+      thirdAdd = "";
+      themePrice = 0;
+    }
+  };
+  checkSelectedAdds(obj);
+
+  return {
+    firstAdd,
+    secondAdd,
+    thirdAdd,
+    onlinePrice,
+    storagePrice,
+    themePrice,
+    selectedPrice,
+  };
+}
+function totalPrice(obj1, obj2) {
+  const plan = Number(summaryPlan(obj1).price);
+  const adds = summaryAdds(obj2).selectedPrice;
+  let totalAdds = 0;
+  let sum = 0;
+  adds.forEach((price) => {
+    totalAdds += price;
+  });
+  sum = plan + totalAdds;
+  return sum;
+}
