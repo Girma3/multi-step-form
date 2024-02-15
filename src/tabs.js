@@ -1,9 +1,9 @@
 // class to hold info
 export class UserPersonalInfo {
   constructor(options = {}) {
-    this.name = options.name || "you";
-    this.email = options.email || "gmail";
-    this.phone = options.phone || "0927";
+    this.name = options.name || "";
+    this.email = options.email || "";
+    this.phone = options.phone || "";
   }
 }
 export class UserPlanData {
@@ -88,15 +88,22 @@ const tabOne = function (obj) {
             <form class="personal-info-form">
                 <div class="label-holder">
                     <label for="user-name">Name</label>
-                    <input type="text" id="user-name" name="user-name" class='user-info' data-user-name value="${obj.name}">
+                    <p class="error-msg" data-error-msg=0></p>
+              
+                    <input type="text" id="user-name" name="user-name" class='user-info' data-user-name data-error=0 minlength="2"
+                    
+                  maxlength="20"  value="${obj.name}">
                 </div>
                 <div class="label-holder">
                     <label for="user-email">Email Adress</label>
-                    <input type="email" id="user-email" name="user-email" class='user-info' data-user-email value="${obj.email}">
+                    <p class="error-msg"  data-error-msg=1></p>
+                    <input type="email" id="user-email" name="user-email" class='user-info' data-user-email data-error=1  value="${obj.email}">
                 </div>
                 <div class="label-holder">
                     <label for="user-phone">Phone Number</label>
-                    <input type="number" id="user-phone" name="user-phone" class='user-info' data-user-phone value="${obj.phone}">
+                    <p class="error-msg"  data-error-msg=2></p>
+                    <input id="user-phone" name="user-phone" class='user-info' data-user-phone data-error=2  minlength="10" maxlength="15
+                     value="${obj.phone}">
                 </div>
                 
             </form>
@@ -146,10 +153,10 @@ const tabTwo = function (obj) {
       
    </div>
    <div class="toggle-holder">
-        <div>monthly</div>
+        <div data-monthly>monthly</div>
         <input type="checkbox" name="user-plan" id="user-plan" class="checkbox" data-choose-plan  ${obj.checkbox}>
         <label for="user-plan" class="toggle"> </label>
-        <div>yearly</div>
+        <div data-yearly>yearly</div>
     </div>
 <div class="nav-btns">
     <button class="tab-two-btn" data-tab-two-back-btn>Go Back</button>
@@ -282,6 +289,11 @@ export const functions = {
   stepThree: tabThree,
   stepFour: tabFour,
 };
+/**
+ * function that accept nodelist and change price according to selected plan(mpnthly or yearly)
+ * @param {*} arrary nodelis of element
+ * @param {*} object that store price (choosenplan property  get monthly or yearly price for each plans)
+ */
 export function changePrice(arr, obj) {
   obj.choosenPlan();
   arr.forEach((element) => {
@@ -295,11 +307,10 @@ export function changePrice(arr, obj) {
   });
 }
 /*
-  *function that give diferent background style for the given index element
-  *param 1:aray to accept 
-  *parm 2:index number
-  
-  */
+ *function that give diferent border style for the given dom element
+ *param 1:array to accept(nodelist)
+ *parm 2:dom element
+ */
 export function addEvents(arr, domElement) {
   arr.forEach((element) => {
     element === domElement
@@ -307,11 +318,30 @@ export function addEvents(arr, domElement) {
       : (element.style.border = "2px solid blue");
   });
 }
-// save state after apppend elment using index number from (userdata.selectedplan)
-export function state(index) {
+// save state of selected plan border style after apppend elment using index number from (userdata.selectedplan)
+export function state(index, obj) {
+  console.log(index);
   const plan = document.querySelector(`[data-plan="${index}"]`);
+  const montlyToggle = document.querySelector("[data-monthly]");
+  const yearlyToggle = document.querySelector("[data-yearly]");
+
   plan.style.border = "2px solid red";
+  console.log(obj.checkbox);
+  console.log(obj);
+  if (obj.checkbox === "checked") {
+    yearlyToggle.style.backgroundColor = "yellow";
+    montlyToggle.style.backgroundColor = "blue";
+  } else if (obj.checkbox === "") {
+    montlyToggle.style.backgroundColor = "green";
+    yearlyToggle.style.backgroundColor = "blue";
+  }
 }
+/**
+ * function to check which adds is selected or not
+ * @param {*} index
+ * @param {*} domElement
+ * @param {*} obj
+ */
 export function isChecked(index, domElement, obj) {
   if (index === 0 && domElement.checked === true) {
     obj.online = "checked";
@@ -329,6 +359,11 @@ export function isChecked(index, domElement, obj) {
 }
 // step four summary
 // userdata obj
+/*
+ *function that accept object check selected plan using there index number and return name and price
+ *param 1:object that store selected item as number(0,1,2)
+ *return string (plan name ) and number (it's price)
+ */
 function summaryPlan(obj) {
   let planName, plan, price;
   if (obj.selectedPlan === 0) {
@@ -354,8 +389,12 @@ function summaryPlan(obj) {
     price,
   };
 }
-// useradds
 
+/*
+ *function that accept object and give selected adds name and there prices
+ *param 1 :object
+ *return name of add(string) and price as an array
+ */
 function summaryAdds(obj) {
   let firstAdd, secondAdd, thirdAdd, onlinePrice, storagePrice, themePrice;
   const selectedPrice = [];
@@ -375,7 +414,7 @@ function summaryAdds(obj) {
     selectedPrice.push(themePrice);
   }
 
-  // use closure
+  // use closure to reset items if not selected
   const checkSelectedAdds = function (obj) {
     if (obj.online !== "checked") {
       firstAdd = "";
@@ -402,6 +441,12 @@ function summaryAdds(obj) {
     selectedPrice,
   };
 }
+/*
+ *function that accept two objects and calculate price or sum
+ *param 1: obj1 hold plan price (monthly or yearly)
+ *param 2: obj2 hold selected adds price as an arrary
+ *return number (sum)
+ */
 function totalPrice(obj1, obj2) {
   const plan = Number(summaryPlan(obj1).price);
   const adds = summaryAdds(obj2).selectedPrice;
@@ -412,4 +457,56 @@ function totalPrice(obj1, obj2) {
   });
   sum = plan + totalAdds;
   return sum;
+}
+// function to validate step one form
+/**
+ *
+ * @param {*} field : input field
+ * @param {*} index : 0 represent username,1 user email ,2 userphone number respectively
+ * @param {*} errDom :domelemnt to show error message
+ */
+export function validateForm(field, index, errDom) {
+  const emailReg = /\w+[@]{1}[a-z-]+[.]{1}[a-z]{2,}([.]{1}[a-z]{2,})?/;
+  const phoneReg = /^[0-9]{10,15}$/;
+  const stringReg = /[a-z]+/;
+  if (field.value === "") {
+    errDom.textContent = "This field is Required!";
+    field.className = "invalid";
+    return;
+  }
+  if (index === 0) {
+    if (field.validity.tooShort) {
+      errDom.textContent = "too short add more character";
+      field.className = "invalid";
+      console.log("heyyy");
+    } else if (field.validity.tooLong) {
+      errDom.textContent = "too long must be 2-20 characters";
+      field.className = "invalid";
+    } else if (field.validity.valid) {
+      errDom.textContent = "";
+      field.className = "valid";
+    }
+  } else if (index === 1) {
+    if (emailReg.test(field.value)) {
+      field.className = "valid";
+      errDom.textContent = "";
+    } else if (emailReg.test(field.value) === false) {
+      errDom.textContent = "wrong format,use (example@domain.ext)";
+      field.className = "invalid";
+    }
+  } else if (index === 2) {
+    if (field.validity.tooLong) {
+      errDom.textContent = "too long must be 10-15 characters";
+      field.className = "invalid";
+    } else if (field.validity.tooShort) {
+      errDom.textContent = "too short must be 10-15 characters";
+      field.className = "invalid";
+    } else if (stringReg.test(field.value)) {
+      errDom.textContent = "Please enter numbers only!";
+      field.className = "invalid";
+    } else if (phoneReg.test(Number(field.value))) {
+      field.className = "valid";
+      errDom.textContent = "";
+    }
+  }
 }
