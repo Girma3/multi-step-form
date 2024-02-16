@@ -126,9 +126,9 @@ label{
     display: flex;
     
     flex-direction: column;
-    align-items: center;
-    width: 190px;
-    max-width: 200px;
+    align-items:flex-start;
+    width: 200px;
+   
     height: 190px;
     padding: 1rem;
     border-radius: 1rem;
@@ -140,9 +140,16 @@ label{
     border: 2px solid hsl(243, 100%, 62%);
    }
    .about-plan{
-    
+    font-weight: 500;
     width: fit-content;
+  
 
+   }
+   .plan-detail{
+     display: flex;
+     flex-direction: column;
+     gap: 0.3rem;
+     align-items: flex-start;
    }
    .plan-name{
     font-weight: 700;
@@ -150,6 +157,7 @@ label{
     font-size: 1rem;
    }
    .icon-holder{
+    margin-right: 2rem;
     margin-bottom: 1.5rem;
    }
    .toggle{
@@ -243,27 +251,53 @@ label{
     .tab-four{
         margin: 1.5rem;
     }
-    .summary-plan,.summary-services,.summary-total{
+    .summary-plan, .add-detail, .summary-total{
         display: flex;
         justify-content: space-between;
        padding: 0.5rem;
+       color:hsl(213, 96%, 18%);
        
     }
+    .summary-services{
+        height: fit-content;
+    }
+   .add-detail > p{
+    margin: 0;
+   }
+    
     .selected-plan{
         margin: 0;
         font-size: 1rem;
         padding-bottom: 0.5rem;
 
     }
+    .summary-price{
+        font-weight: 500;
+        font-size: 1.2rem;
+    }
     .change-plan{
         outline: none;
         border: none;
         background-color: inherit;
         cursor: pointer;
+      
     }
-    
+    .add-name{
+        color:hsl(231, 11%, 63%) ; 
+        font-weight: 400;
+        font-size: 1rem;
+    }
+    .online-price, .theme-price, .storage-price{
+        font-size: 1rem;
+        font-weight: 400;
+    }
+    .total-price{
+        font-weight: 900;
+        font-size: 1.5rem;
+    }
     .change-plan:hover{
-        border-bottom: 2px solid blue;
+        border-bottom: 1px solid blue;
+        color:hsl(243, 100%, 62%)
     }
     hr{
         margin: 1rem;
@@ -298,5 +332,25 @@ label{
     input{
         width: 100%;
     }
+    /* step two cards */
+    .plans{
+        flex-wrap: wrap;
+    }
+    .plan-holder{
+flex-wrap: wrap;
+width: 100%;
+align-items: flex-start;
+justify-content: center;
+height: 7rem;
+    }
+    .about-plan {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
     
+    .icon-holder{
+        margin: auto;
+    }
+   
 }
