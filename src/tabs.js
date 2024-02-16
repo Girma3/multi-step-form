@@ -510,3 +510,16 @@ export function validateForm(field, index, errDom) {
     }
   }
 }
+export function isEmpty(arr) {
+  const invalidInput = [];
+  let result;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].className === "invalid") {
+      invalidInput.push(arr[i]);
+    } else if (arr[i].value === "") {
+      invalidInput.push(arr[i]);
+    }
+  }
+  invalidInput.length > 0 ? (result = true) : (result = false);
+  return result;
+}
