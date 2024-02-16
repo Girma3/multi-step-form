@@ -15,13 +15,25 @@ export class UserPlanData {
     this.advanced = options.advanced || "";
     this.pro = options.pro || "";
     this.bonus = options.bonus || "none";
-    this.selectedPlan = options.selectedPlan || 0;
+    this.selectedPlan = options.selectedPlan || "";
+    this.monhtly = options.monthly || "";
+    this.yearly = options.yearly || "";
   }
 
   yearlyPrice() {
     this.arcade = 90;
     this.advanced = 120;
     this.pro = 150;
+  }
+
+  style() {
+    if (this.plan === false) {
+      this.monthly = "hsl(213, 96%, 18%";
+      this.yearly = "hsl(231, 11%, 63%)";
+    } else if (this.plan === true) {
+      this.monthly = "hsl(213, 96%, 18%";
+      this.yearly = "hsl(231, 11%, 63%)";
+    }
   }
 
   monthlyPrice() {
@@ -81,7 +93,7 @@ const tabOne = function (obj) {
     <div class="step-one">
         <div class="form-header">
             <h1>Personal Info</h1>
-            <p>please provide your name,email adress and phone number</p>
+            <p class="instruction">please provide your name,email adress and phone number</p>
         </div>
 
         <div class="form-holder">
@@ -115,48 +127,50 @@ const tabOne = function (obj) {
 };
 const tabTwo = function (obj) {
   obj.choosenPlan();
+  obj.style();
   const div = document.createElement("div");
   const plan = `
     <div class="step-two">
     <div class="plan-header">
         <h1>Select your Plan</h1>
-        <p>you have the option monthly or yearly billing.</p>
+        <p class="instruction">you have the option monthly or yearly billing.</p>
     </div>
     <div class="plans" data-plans >
-        <div class="plan-holder" data-plan="0">
+        <button class="plan-holder" data-plan="0">
         
             <div class="about-plan">
-                <div class="icon-holder"><img src="../src/assets/icon-arcade.svg" alt="" srcset=""></div>
+                <div class="icon-holder"><img src="../src/assets/icon-arcade.svg" alt="icon for arcade plan" ></div>
                 <div class="plan-name">Arcade</div>
                 <div class="plan-fee">${obj.arcade}</div>
                 <div class="plan-description" data-gift style='display:${obj.bonus};'>2 months fee</div>
             </div>
-        </div>
-        <div class="plan-holder" data-plan="1">
+        </button>
+        <button class="plan-holder" data-plan="1">
         
             <div class="about-plan">
-                <div class="icon-holder"><img src="../src/assets/icon-advanced.svg" alt="" srcset=""></div>
+                <div class="icon-holder"><img src="../src/assets/icon-advanced.svg" alt="icon for advanced plan" ></div>
                 <div class="plan-name">Advanced</div>
                 <div class="plan-fee">${obj.advanced}</div>
                 <div class="plan-description" data-gift style='display:${obj.bonus};'>2 months fee</div>
             </div>
-        </div>
-        <div class="plan-holder"  data-plan="2">
+        </button>
+        <button class="plan-holder"  data-plan="2">
         
             <div class="about-plan">
-                <div class="icon-holder"><img src="../src/assets/icon-pro.svg" alt="" srcset=""></div>
+                <div class="icon-holder"><img src="../src/assets/icon-pro.svg" alt="icon for pro plan" ></div>
                 <div class="plan-name">Pro</div>
                 <div class="plan-fee">${obj.pro}</div>
                 <div class="plan-description" data-gift style='display:${obj.bonus};' >2 months fee</div>
             </div>
-        </div>
+        </button>
       
-   </div>
+      </div>
+   <p data-select-plan ></p>
    <div class="toggle-holder">
-        <div data-monthly>monthly</div>
+        <div data-monthly style="color:${obj.monthly};">monthly</div>
         <input type="checkbox" name="user-plan" id="user-plan" class="checkbox" data-choose-plan  ${obj.checkbox}>
         <label for="user-plan" class="toggle"> </label>
-        <div data-yearly>yearly</div>
+        <div data-yearly style="color:${obj.yearly};">yearly</div>
     </div>
 <div class="nav-btns">
     <button class="tab-two-btn" data-tab-two-back-btn>Go Back</button>
@@ -165,18 +179,16 @@ const tabTwo = function (obj) {
    </div>
     `;
   div.innerHTML = plan;
-
   return div;
 };
 const tabThree = function (obj) {
-  // check(obj);
   obj.choosenPlan();
   const div = document.createElement("div");
   const storage = `
     <div class="tab-three">
     <div>
         <h1>Pick add-ons</h1>
-        <p>Add-ons enhance your gaming experience.</p>
+        <p class="instruction">Add-ons enhance your gaming experience.</p>
     </div>
        <div class="about-adds">
        
@@ -242,7 +254,7 @@ const tabFour = function (objOne, objTwo) {
     <div class="tab-four">
     <div class="confirm-header">
         <h1>Finishing up</h1>
-        <p>Double-check everything looks OK before confirming.</p>
+        <p class="instruction">Double-check everything looks OK before confirming.</p>
     </div>
     <div class="service-holder">
     <div class="summary-plan">
@@ -291,7 +303,7 @@ export const functions = {
 };
 /**
  * function that accept nodelist and change price according to selected plan(mpnthly or yearly)
- * @param {*} arrary nodelis of element
+ * @param {*} arrary nodelist of element
  * @param {*} object that store price (choosenplan property  get monthly or yearly price for each plans)
  */
 export function changePrice(arr, obj) {
@@ -314,27 +326,15 @@ export function changePrice(arr, obj) {
 export function addEvents(arr, domElement) {
   arr.forEach((element) => {
     element === domElement
-      ? (element.style.border = "2px solid red")
-      : (element.style.border = "2px solid blue");
+      ? (element.style.border = "2px solid hsl(243, 100%, 62%)")
+      : (element.style.border = "1px solid  hsl(213, 96%, 18%)");
   });
 }
 // save state of selected plan border style after apppend elment using index number from (userdata.selectedplan)
-export function state(index, obj) {
-  console.log(index);
+export function selectedCard(index) {
   const plan = document.querySelector(`[data-plan="${index}"]`);
-  const montlyToggle = document.querySelector("[data-monthly]");
-  const yearlyToggle = document.querySelector("[data-yearly]");
-
-  plan.style.border = "2px solid red";
-  console.log(obj.checkbox);
-  console.log(obj);
-  if (obj.checkbox === "checked") {
-    yearlyToggle.style.backgroundColor = "yellow";
-    montlyToggle.style.backgroundColor = "blue";
-  } else if (obj.checkbox === "") {
-    montlyToggle.style.backgroundColor = "green";
-    yearlyToggle.style.backgroundColor = "blue";
-  }
+  if (plan === null) return;
+  plan.style.border = "2px solid blue";
 }
 /**
  * function to check which adds is selected or not
