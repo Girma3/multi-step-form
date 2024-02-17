@@ -1,5 +1,5 @@
 body{
-    background-color:  hsl(0, 0%, 100%);
+    background-color:  hsl(206, 94%, 87%);
     min-height: 100vh;
     max-width: 100vw;
     display: grid;
@@ -14,10 +14,8 @@ nav{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: bottom;
-    border: 2px solid red;
     height: 95%;
-  
-}
+  }
 ul{
     display: flex;
     flex-direction: column;
@@ -60,25 +58,35 @@ h1{
     margin: 0;
     color:hsl(213, 96%, 18%);
 }
-.instruction, .plan-fee, .add-plan{
+.instruction, .plan-fee, .add-plan {
     color:hsl(231, 11%, 63%) ;
     font-size: 1rem;
     font-weight: 700;
 }
-/* personal info form */
-.step-one{
-    display: flex;
-    margin: 3rem;
-    flex-direction: column;
-    border: solid 1px red;
-    padding: 0.5rem;
-   
+.back-btn{
+    color:hsl(231, 11%, 63%) ; 
 }
+/* personal info form */
+.step-one, .step-two, .tab-three, .tab-four{
+    display: flex;
+    margin: 1rem;
+    flex-direction: column;
+    background-color: hsl(0, 0%, 100%);
+    padding: 1rem;
 
+     }
+  
+   
+.error-msg{
+    margin: 1px;
+    width: 60%;
+    color:  hsl(354, 84%, 57%);
+    text-align: end;
+}
 .label-holder{
     display: flex;
     flex-direction: column;
-    margin: 1rem;
+    margin: 0.3rem;
 }
 input{
     width: 60%;
@@ -88,88 +96,83 @@ input{
    color:hsl(214, 93%, 12%);
    font-weight: 500;
    font-size: 1rem;
-   
-}
+ }
 label{
     color:hsl(213, 96%, 18%);;
 }
-
-.tab-one-btn{
-    padding: 1rem;
-   margin-left: 45%;
-    background-color: hsla(213, 96%, 18%, 1);
-    color: white;
-    font-weight: 500;
-    border: none;
-    border-radius: 0.5rem;
+.invalid{
+    border: 2px  hsl(354, 84%, 57%) solid;
    }
-   .invalid{
-    border: 2px red solid;
-   }
-   .valid{
+.valid{
     border: 2px green  solid;
    }
+   .btn-holder{
+    width: 64%;
+    display: flex;
+    justify-content: end;
+    margin-top: 3rem;
+}
    /* tab two */
-   .step-two{
-    width: fit-content;
-    margin: 1rem;
-    font-weight: 400;
-   }
+  
    .plans{
     display: flex;
     gap: 1rem;
-    
-   }
+    flex-wrap: wrap;
+    }
    .plan-holder{
-    border: 1px solid  hsl(213, 96%, 18%);
-    
-    display: flex;
-    
-    flex-direction: column;
-    align-items:flex-start;
-    width: 200px;
-   
-    height: 190px;
-    padding: 1rem;
-    border-radius: 1rem;
-    cursor: pointer;
-    
-   }
+        border: 1px solid  hsl(213, 96%, 18%);
+        display: flex;
+        flex-direction: column;
+        align-items:flex-start;
+        width: 200px;
+        height: 190px;
+        padding: 1rem;
+        border-radius: 1rem;
+        cursor: pointer;
+    }
    .plan-holder:hover{
-    background-color: hsl(229, 24%, 87%);
-    border: 2px solid hsl(243, 100%, 62%);
+        background-color: hsl(229, 24%, 87%);
+        border: 2px solid hsl(243, 100%, 62%);
    }
    .about-plan{
-    font-weight: 500;
-    width: fit-content;
-  
-
+        font-weight: 500;
+        width: fit-content;
    }
-   .plan-detail{
-     display: flex;
-     flex-direction: column;
-     gap: 0.3rem;
-     align-items: flex-start;
+   .plan-detail, .about-plan{
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        align-items: flex-start;
    }
    .plan-name{
-    font-weight: 700;
-    color: hsl(213, 96%, 18%);
-    font-size: 1rem;
+        font-weight: 700;
+        color: hsl(213, 96%, 18%);
+        font-size: 1rem;
    }
    .icon-holder{
-    margin-right: 2rem;
-    margin-bottom: 1.5rem;
-   }
+        margin-right: 1.5rem;
+   } 
+   .toggle-holder{
+        display: flex;
+        gap: 1rem;
+        margin: 1rem;
+        align-items: center;
+        justify-content: center;
+        border-radius:5px ;
+        background-color:hsl(229, 24%, 87%);
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+    }
    .toggle{
-    display: inline-block;
-    position: relative;
-    width: 70px;
-    height: 30px;
-    background-color:hsl(213, 96%, 18%);
-    border: none;
-    border-radius: 20px;
-    transition: all 0.5s;
-   }
+        display: inline-block;
+        position: relative;
+        width: 50px;
+        height: 30px;
+        background-color:hsl(213, 96%, 18%);
+        border: none;
+        border-radius: 20px;
+        transition: all 0.5s;
+    }
    .toggle::after{
         content: "";
         position: absolute;
@@ -180,52 +183,49 @@ label{
         left: 1px;
         background-color: hsl(0, 0%, 100%);
    }
-  
-   .checkbox:checked + .toggle::after{
-        left: 50px;
-        background-color: yellow;
-    }
+  .checkbox:checked + .toggle::after{
+        left: 25px;
+     }
     .checkbox{
         display: none;
-    }
-    .toggle-holder{
-        display: flex;
-        gap: 1rem;
-        margin: 1rem;
-        align-items: center;
-        justify-content: center;
-        border-radius:5px ;
-       
-         
     }
     .nav-btns{
         display: flex;
         justify-content: space-between;
         align-items: baseline;
         margin: 1rem;
+        background-color: hsl(0, 0%, 100%);
+        border-radius: 0.5rem;
+        width: 90%;
+        padding: 0.6rem;
 
-    }
-    /* same reduce it */
-    .tab-two-btn,.tab-three-btn,.tab-four-btn,.tab-four-confirm{
-       
-       padding: 1rem;
-        background-color: blue;
+     }
+    
+    .tab-two-btn, .tab-three-btn, .tab-four-btn, .tab-four-confirm , .tab-one-btn{
+        padding: 1rem;
+        background-color: hsl(213, 96%, 18%);
         color: azure;
         border: none;
         width: fit-content;
         border-radius: 0.5rem;
     }
+   
+   
+   
     /* tab three */
-    .tab-three{
+    /* .tab-three{
         margin-left: 1rem;
-    }
+    } */
     .about-adds{
         border: 2px solid  hsl(243, 100%, 62%);
         border-radius: 0.4rem;
         padding: 1rem;
         margin: 1rem;
+       
     }
-  
+    .about-adds:hover{
+        box-shadow: rgb(0, 0, 0) -1px 3px 3px;
+    }
     .add-holder,.add-header{
         display: flex;
         align-items: center;
@@ -278,11 +278,16 @@ label{
     .change-plan{
         outline: none;
         border: none;
+        padding: 0;
         background-color: inherit;
         cursor: pointer;
       
     }
-    .add-name{
+    .change-plan:hover{
+        border-bottom: 2px solid  hsl(243, 100%, 62%);
+        color: hsl(243, 100%, 62%);
+    }
+    .add-name, .change-plan{
         color:hsl(231, 11%, 63%) ; 
         font-weight: 400;
         font-size: 1rem;
@@ -295,10 +300,7 @@ label{
         font-weight: 900;
         font-size: 1.5rem;
     }
-    .change-plan:hover{
-        border-bottom: 1px solid blue;
-        color:hsl(243, 100%, 62%)
-    }
+    
     hr{
         margin: 1rem;
     }
@@ -310,47 +312,133 @@ label{
        
     }
     
-   
-@media (max-width:500px) {
+    .back-btn{
+        color:hsl(231, 11%, 63%) ; 
+        background-color: hsl(231, 100%, 99%);
+        
+    }
+@media (max-width:565px) {
     /* nav */
     body{
         grid-template-columns: 1fr;
     }
     nav{
         background-image:url(./assets/bg-sidebar-mobile.svg) ;
-        
-        height: 100%;
+        background-position: top;
+        height: 30vh;
         width: 100vw;
-        
     }
     ul{
         flex-direction: row;
     }
-    .nav-description{
+   .nav-description{
         display: none;
     }
+    /* step one */
+    .step-one{
+        position: absolute;
+        bottom: 22%;
+        border-radius: 0.5rem;
+        width: 70%;
+    }
     input{
-        width: 100%;
+        width: 80%;
+    }
+    .step-two, .tab-three, .tab-four{
+        position: relative;
+       
+        border-radius: 0.5rem;
+        width: 70%;
+       }
+       .step-two{
+        bottom: 6rem;
+       }
+       .tab-three{
+        bottom: 8rem;
+       }
+       .tab-four{
+        bottom: 6.4rem;
+        right: 1rem;
+       }
+    .add-header{
+        gap: 0.3rem;
+    }
+    /* step three */
+    
+    .about-adds{
+       padding: 0.5rem;
+       margin: 0;
+       margin-bottom: 1rem;
+       
+    }
+    
+    .add-title{
+        font-size: 1rem;
+        font-weight: 400;
+    }
+    .add-plan{
+        font-weight: 500;
+        font-size: 0.7rem;
+        
+       
+    }
+    
+   
+    .btn-holder{
+        position: absolute;
+        top: 58vh;
+        left: 35%;
     }
     /* step two cards */
     .plans{
         flex-wrap: wrap;
+        gap: 0.5rem;
     }
+    .error-card{
+        margin: 0;
+        padding: 0;
+    }
+    .plan-fee{
+        font-weight: 700;
+        font-size: 0.7rem;
+    }
+ 
+.nav-btns{
+    margin: 0;
+    position: absolute;
+    top: 28rem;
+    right: 0.1rem;
+    
+}
+/* .tab-three > .nav-btns{
+    
+    right: 0.5rem;
+} */
+.tab-four > .nav-btns{
+    top: 28rem;
+}
+.service-holder{
+    height: 270px;
+}
+
     .plan-holder{
-flex-wrap: wrap;
-width: 100%;
-align-items: flex-start;
-justify-content: center;
-height: 7rem;
+        flex-wrap: wrap;
+        width: 100%;
+        align-items: flex-start;
+        justify-content: center;
+        height: 84px;
+        padding: 5px;
     }
     .about-plan {
-        display: flex;
+       flex-direction: row;
         align-items: center;
         gap: 0.5rem;
     }
-    
-    .icon-holder{
-        margin: auto;
+    .toggle-holder{
+        margin: 0;
+        margin-top: 3px;
     }
+    
+   
    
 }
