@@ -108,19 +108,22 @@ const tabOne = function (obj) {
                 </div>
                 <div class="label-holder">
                     <label for="user-email">Email Adress</label>
-                    <p class="error-msg"  data-error-msg=1></p>
-                    <input type="email" id="user-email" name="user-email" class='user-info' data-user-email data-error=1  value="${obj.email}">
-                </div>
+                     <p class="error-msg"  data-error-msg=1></p>
+                      <input type="email" id="user-email" name="user-email" class='user-info' data-user-email data-error=1  value="${obj.email}">
+                    </div>
+                    
                 <div class="label-holder">
                     <label for="user-phone">Phone Number</label>
                     <p class="error-msg"  data-error-msg=2></p>
                     <input id="user-phone" name="user-phone" class='user-info' data-user-phone data-error=2  minlength="10" maxlength="15
                      value="${obj.phone}">
+                    
                 </div>
                 
             </form>
-            <button class="tab-one-btn">Next Step</button>
+            
         </div>
+        <div class="btn-holder"><button class="tab-one-btn">Next Step</button></div>
     </div>`;
   div.innerHTML = personalInfo;
   return div;
@@ -140,32 +143,38 @@ const tabTwo = function (obj) {
         
             <div class="about-plan">
                 <div class="icon-holder"><img src="../src/assets/icon-arcade.svg" alt="icon for arcade plan" ></div>
-                <div class="plan-name">Arcade</div>
-                <div class="plan-fee">${obj.arcade}</div>
-                <div class="plan-description" data-gift style='display:${obj.bonus};'>2 months fee</div>
+                <div class="plan-detail">
+                  <div class="plan-name">Arcade</div>
+                  <div class="plan-fee">${obj.arcade}</div>
+                  <div class="plan-description" data-gift style='display:${obj.bonus};'>2 months fee</div>
+                </div>
             </div>
         </button>
         <button class="plan-holder" data-plan="1">
         
             <div class="about-plan">
                 <div class="icon-holder"><img src="../src/assets/icon-advanced.svg" alt="icon for advanced plan" ></div>
-                <div class="plan-name">Advanced</div>
-                <div class="plan-fee">${obj.advanced}</div>
-                <div class="plan-description" data-gift style='display:${obj.bonus};'>2 months fee</div>
+                <div class="plan-detail">
+                  <div class="plan-name">Advanced</div>
+                  <div class="plan-fee">${obj.advanced}</div>
+                  <div class="plan-description" data-gift style='display:${obj.bonus};'>2 months fee</div>
+                </div>
             </div>
         </button>
         <button class="plan-holder"  data-plan="2">
         
             <div class="about-plan">
                 <div class="icon-holder"><img src="../src/assets/icon-pro.svg" alt="icon for pro plan" ></div>
-                <div class="plan-name">Pro</div>
-                <div class="plan-fee">${obj.pro}</div>
-                <div class="plan-description" data-gift style='display:${obj.bonus};' >2 months fee</div>
+                <div class="plan-detail">
+                  <div class="plan-name">Pro</div>
+                  <div class="plan-fee">${obj.pro}</div>
+                  <div class="plan-description" data-gift style='display:${obj.bonus};' >2 months fee</div>
+                </div>
             </div>
         </button>
       
       </div>
-   <p data-select-plan ></p>
+   <p class="error-card" data-select-plan  ></p>
    <div class="toggle-holder">
         <div data-monthly style="color:${obj.monthly};">monthly</div>
         <input type="checkbox" name="user-plan" id="user-plan" class="checkbox" data-choose-plan  ${obj.checkbox}>
@@ -173,8 +182,8 @@ const tabTwo = function (obj) {
         <div data-yearly style="color:${obj.yearly};">yearly</div>
     </div>
 <div class="nav-btns">
-    <button class="tab-two-btn" data-tab-two-back-btn>Go Back</button>
-    <button class="tab-two-btn" data-tab-two-next-btn>Next</button>
+    <button class="tab-two-btn back-btn"  data-tab-two-back-btn>Go Back</button>
+    <button class="tab-two-btn" data-tab-two-next-btn>Next Step</button>
 </div>
    </div>
     `;
@@ -240,8 +249,8 @@ const tabThree = function (obj) {
             </div>
        </div>
        <div class="nav-btns">
-        <button class="tab-three-btn"  data-tab-three-back-btn >Go Back</button>
-        <button class="tab-three-btn" data-tab-three-next-btn >Next</button>
+        <button class="tab-three-btn back-btn"  data-tab-three-back-btn >Go Back</button>
+        <button class="tab-three-btn" data-tab-three-next-btn >Next Step</button>
     </div>
    </div>
     `;
@@ -261,7 +270,7 @@ const tabFour = function (objOne, objTwo) {
 
         <div class="plan">
             <h2 class="selected-plan">${summaryPlan(objOne).planName}(${summaryPlan(objOne).plan})</h2>
-            <button class="change-plan">change</button>
+            <button class="change-plan">Change</button>
         </div>
         <div class="summary-price">${summaryPlan(objOne).price}</div>
        
@@ -269,18 +278,25 @@ const tabFour = function (objOne, objTwo) {
        <hr>
         <div class="summary-services">
 
-            <div class="services">
             
-                <p> ${summaryAdds(objTwo).firstAdd} </p>
-                <p> ${summaryAdds(objTwo).secondAdd} </p>
-                <p> ${summaryAdds(objTwo).thirdAdd} </p>
-               
-             </div>
-            <div class="service-prices">
+              <div class="add-detail">
+                <p class="add-name"> ${summaryAdds(objTwo).firstAdd} </p>
                 <p class="online-price">${summaryAdds(objTwo).onlinePrice}</p>
+              </div>
+              <div class="add-detail">
+                <p class="add-name"> ${summaryAdds(objTwo).secondAdd} </p>
                 <p class="storage-price">${summaryAdds(objTwo).storagePrice}</p>
+              </div>
+              <div class="add-detail">
+                <p class="add-name"> ${summaryAdds(objTwo).thirdAdd} </p>
                 <p class="theme-price">${summaryAdds(objTwo).themePrice}</p>
-            </div>
+              </div>
+           
+           
+               
+                
+                
+           
         </div>
     </div>
         <div class="summary-total">
@@ -288,7 +304,7 @@ const tabFour = function (objOne, objTwo) {
             <span class="total-price">${totalPrice(objOne, objTwo)}</span>
         </div>
         <div class="nav-btns">
-            <button class="tab-four-btn">Go Back</button>
+            <button class="tab-four-btn back-btn">Go Back</button>
             <button class="tab-four-confirm">Confirm</button>
         </div>
  </div>`;
@@ -418,15 +434,15 @@ function summaryAdds(obj) {
   const checkSelectedAdds = function (obj) {
     if (obj.online !== "checked") {
       firstAdd = "";
-      onlinePrice = 0;
+      onlinePrice = "";
     }
     if (obj.storage !== "checked") {
       secondAdd = "";
-      storagePrice = 0;
+      storagePrice = "";
     }
     if (obj.theme !== "checked") {
       thirdAdd = "";
-      themePrice = 0;
+      themePrice = "";
     }
   };
   checkSelectedAdds(obj);
@@ -476,11 +492,11 @@ export function validateForm(field, index, errDom) {
   }
   if (index === 0) {
     if (field.validity.tooShort) {
-      errDom.textContent = "too short add more character";
+      errDom.textContent = "Too short add more character.";
       field.className = "invalid";
       console.log("heyyy");
     } else if (field.validity.tooLong) {
-      errDom.textContent = "too long must be 2-20 characters";
+      errDom.textContent = "Too long must be 2-20 characters.";
       field.className = "invalid";
     } else if (field.validity.valid) {
       errDom.textContent = "";
@@ -491,18 +507,18 @@ export function validateForm(field, index, errDom) {
       field.className = "valid";
       errDom.textContent = "";
     } else if (emailReg.test(field.value) === false) {
-      errDom.textContent = "wrong format,use (example@domain.ext)";
+      errDom.textContent = "wrong format,use(example@domain.ext)";
       field.className = "invalid";
     }
   } else if (index === 2) {
-    if (field.validity.tooLong) {
-      errDom.textContent = "too long must be 10-15 characters";
+    if (stringReg.test(field.value)) {
+      errDom.textContent = "Please enter numbers only!";
+      field.className = "invalid";
+    } else if (field.validity.tooLong) {
+      errDom.textContent = "Too long must be 10-15 characters";
       field.className = "invalid";
     } else if (field.validity.tooShort) {
-      errDom.textContent = "too short must be 10-15 characters";
-      field.className = "invalid";
-    } else if (stringReg.test(field.value)) {
-      errDom.textContent = "Please enter numbers only!";
+      errDom.textContent = "Too short must be 10-15 characters";
       field.className = "invalid";
     } else if (phoneReg.test(Number(field.value))) {
       field.className = "valid";
@@ -510,7 +526,7 @@ export function validateForm(field, index, errDom) {
     }
   }
 }
-export function isEmpty(arr) {
+export function isFormfilled(arr) {
   const invalidInput = [];
   let result;
   for (let i = 0; i < arr.length; i++) {
@@ -520,6 +536,21 @@ export function isEmpty(arr) {
       invalidInput.push(arr[i]);
     }
   }
-  invalidInput.length > 0 ? (result = true) : (result = false);
+  invalidInput.length > 0 ? (result = false) : (result = true);
+  return result;
+}
+// function that accept object and check value is empty(used to switch tab 2)
+export function isValueEmpty(obj) {
+  let result;
+  const keyArray = Object.keys(obj);
+  for (let index = 0; index < keyArray.length; index++) {
+    const element = keyArray[index];
+    if (obj[element] === "") {
+      result = true;
+      break;
+    } else if (obj[element] !== "") {
+      result = false;
+    }
+  }
   return result;
 }
