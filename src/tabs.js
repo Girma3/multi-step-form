@@ -291,21 +291,15 @@ const tabFour = function (objOne, objTwo) {
                 <p class="add-name"> ${summaryAdds(objTwo).thirdAdd} </p>
                 <p class="theme-price">${summaryAdds(objTwo).themePrice}</p>
               </div>
-           
-           
-               
-                
-                
-           
-        </div>
+           </div>
     </div>
         <div class="summary-total">
             <p class="total-title">Total per year</p>
             <span class="total-price">${totalPrice(objOne, objTwo)}</span>
         </div>
         <div class="nav-btns">
-            <button class="tab-four-btn back-btn">Go Back</button>
-            <button class="tab-four-confirm">Confirm</button>
+            <button class="tab-four-btn back-btn" data-tab-four-back-btn>Go Back</button>
+            <button class="tab-four-confirm" data-tab-four-confirm-btn>Confirm</button>
         </div>
  </div>`;
   div.innerHTML = summary;
@@ -553,4 +547,14 @@ export function isValueEmpty(obj) {
     }
   }
   return result;
+}
+// function to change backgroud color to show which step it is
+export function changeColor(array, index) {
+  array.forEach((element) => {
+    if (array.indexOf(element) === index) {
+      element.style.backgroundColor = "rgb(191, 226, 253)";
+    } else {
+      element.style.backgroundColor = "inherit";
+    }
+  });
 }
