@@ -481,7 +481,9 @@ function totalPrice(obj1, obj2) {
   const planFee = summaryPlan(obj1).price;
   const addsFee = summaryAdds(obj2).selectedPrice;
   const plan = Number(planFee.replace(/[^0-9]/g, ""));
+  const planName = planFee.replace(/[^a-z]/g, ""); // store "mo" or "yr" string
 
+  let sumwithcurrency = "";
   let totalAdds = 0;
   let sum = 0;
   addsFee.forEach((price) => {
@@ -489,7 +491,8 @@ function totalPrice(obj1, obj2) {
     totalAdds += Number(price.replace(/[^0-9]/g, ""));
   });
   sum = plan + totalAdds;
-  return sum;
+  sumwithcurrency = ` $${sum}${planName}`;
+  return sumwithcurrency;
 }
 // function to validate step one form
 /**
