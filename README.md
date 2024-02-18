@@ -57,4 +57,4 @@ to practice more using class methods and separate dom element from logic,validat
 
 ## Author
 
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/Girma3)
+- Frontend Mentor - [(https://www.frontendmentor.io/profile/Girma3)]
