@@ -21,9 +21,23 @@ export class UserPlanData {
   }
 
   yearlyPrice() {
-    this.arcade = 90;
-    this.advanced = 120;
-    this.pro = 150;
+    this.arcade = "$90/yr";
+    this.advanced = "$120/yr";
+    this.pro = "$150/yr";
+  }
+
+  monthlyPrice() {
+    this.arcade = "$9/mo";
+    this.advanced = "$12/mo";
+    this.pro = "$15/mo";
+  }
+
+  choosenPlan() {
+    if (this.plan === true) {
+      this.yearlyPrice();
+    } else if (this.plan === false) {
+      this.monthlyPrice();
+    }
   }
 
   style() {
@@ -33,20 +47,6 @@ export class UserPlanData {
     } else if (this.plan === true) {
       this.monthly = "hsl(213, 96%, 18%";
       this.yearly = "hsl(231, 11%, 63%)";
-    }
-  }
-
-  monthlyPrice() {
-    this.arcade = 9;
-    this.advanced = 12;
-    this.pro = 15;
-  }
-
-  choosenPlan() {
-    if (this.plan === true) {
-      this.yearlyPrice();
-    } else if (this.plan === false) {
-      this.monthlyPrice();
     }
   }
 }
@@ -67,15 +67,15 @@ export class UserServices {
   }
 
   yearlyPrice() {
-    this.onlinePrice = 10;
-    this.storagePrice = 20;
-    this.themePrice = 20;
+    this.onlinePrice = "+$10/yr";
+    this.storagePrice = "+$20/yr";
+    this.themePrice = "+$20/yr";
   }
 
   monthlyPrice() {
-    this.onlinePrice = 1;
-    this.storagePrice = 2;
-    this.themePrice = 2;
+    this.onlinePrice = "+$1/mo";
+    this.storagePrice = "+$2/mo";
+    this.themePrice = "+$2/mo";
   }
 
   choosenPlan() {
@@ -115,7 +115,7 @@ const tabOne = function (obj) {
                 <div class="label-holder">
                     <label for="user-phone">Phone Number</label>
                     <p class="error-msg"  data-error-msg=2></p>
-                    <input id="user-phone" name="user-phone" class='user-info' data-user-phone data-error=2  minlength="10" maxlength="15
+                    <input  id="user-phone" name="user-phone" class='user-info' data-user-phone data-error=2  minlength="10" maxlength="15
                      value="${obj.phone}">
                     
                 </div>
@@ -376,6 +376,7 @@ export function isChecked(index, domElement, obj) {
  */
 function summaryPlan(obj) {
   let planName, plan, price;
+
   if (obj.selectedPlan === 0) {
     planName = "Arcade";
     price = obj.arcade;
@@ -458,12 +459,15 @@ function summaryAdds(obj) {
  *return number (sum)
  */
 function totalPrice(obj1, obj2) {
-  const plan = Number(summaryPlan(obj1).price);
-  const adds = summaryAdds(obj2).selectedPrice;
+  const planFee = summaryPlan(obj1).price;
+  const addsFee = summaryAdds(obj2).selectedPrice;
+  const plan = Number(planFee.replace(/[^0-9]/g, ""));
+
   let totalAdds = 0;
   let sum = 0;
-  adds.forEach((price) => {
-    totalAdds += price;
+  addsFee.forEach((price) => {
+    // price is array of add value convert to num and remove currency sign
+    totalAdds += Number(price.replace(/[^0-9]/g, ""));
   });
   sum = plan + totalAdds;
   return sum;
@@ -478,7 +482,8 @@ function totalPrice(obj1, obj2) {
 export function validateForm(field, index, errDom) {
   const emailReg = /\w+[@]{1}[a-z-]+[.]{1}[a-z]{2,}([.]{1}[a-z]{2,})?/;
   const phoneReg = /^[0-9]{10,15}$/;
-  const stringReg = /[a-z]+/;
+  const stringReg = /[a-z]+/; // check phone number entry
+
   // function to hide error message on focus else show message
   const focusStyle = function () {
     field.addEventListener("focus", () => {
@@ -531,8 +536,12 @@ export function validateForm(field, index, errDom) {
       field.className = "invalid";
       focusStyle();
     } else if (phoneReg.test(Number(field.value))) {
+      console.log(field.value);
       field.className = "valid";
       errDom.textContent = "";
+      const value = field.value;
+      const format = value.replace(/^(.{3})(.{3})(.{4})(.*)$/, "$1 $2 $3");
+      field.value = "+" + format;
     }
   }
 }
@@ -568,6 +577,7 @@ export function isValueEmpty(obj) {
 export function changeColor(array, index) {
   array.forEach((element) => {
     if (array.indexOf(element) === index) {
+      element.style.color = "black";
       element.style.backgroundColor = "rgb(191, 226, 253)";
     } else {
       element.style.backgroundColor = "inherit";
