@@ -239,7 +239,7 @@ label{
        
     }
     .about-adds:hover{
-        box-shadow: rgb(255, 84, 84) -1px 3px 3px;
+        box-shadow: rgb(251, 0, 0) -1px 3px 3px;
     }
     .add-holder,.add-header{
         display: flex;
