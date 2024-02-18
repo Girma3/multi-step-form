@@ -9,50 +9,37 @@ import {
   selectedCard,
   isChecked,
   validateForm,
-  isEmpty,
+  isFormfilled,
+  isValueEmpty,
+  changeColor,
 } from "./tabs";
 const holder = document.querySelector(".preview");
 const dots = document.querySelectorAll(".dot");
 const tabs = [...dots];
-let cardSelected;
-
 const userInfo = new UserPersonalInfo();
 const userPlans = new UserPlanData();
 const userAdds = new UserServices();
-
-const LOCAL_STORAGE_OBJ_KEY = "user.info";
-const userDataArray = JSON.parse(
-  localStorage.getItem(LOCAL_STORAGE_OBJ_KEY)
-) || [userInfo, userPlans];
-// userDataArray.push(userone);
-
-function save() {
-  localStorage.setItem(LOCAL_STORAGE_OBJ_KEY, JSON.stringify(userDataArray));
-}
-
-localStorage.clear();
-// save();
-holder.appendChild(functions.stepOne(userDataArray[0]));
-
+holder.appendChild(functions.stepOne(userInfo)); // default is empty form
 holder.addEventListener("click", (e) => {
   if (e.target.matches(".tab-one-btn")) {
-    // validate step one form if its not empty
     const allInput = document.querySelectorAll("input");
     const arryInput = [...allInput];
+    // validate step one form if its not empty move to next step
+
+    if (isFormfilled(arryInput) === true) {
+      holder.textContent = "";
+      holder.appendChild(functions.stepTwo(userPlans));
+      changeColor(tabs, 1);
+    }
     arryInput.forEach((input) => {
       const errMsg = document.querySelector(
         `[data-error-msg="${Number(input.dataset.error)}"]`
       );
       if (input.value === "") {
         errMsg.textContent = "This field is required!";
+        input.className = "invalid";
       }
     });
-
-    if (isEmpty(arryInput) === false) {
-      holder.textContent = "";
-      holder.appendChild(functions.stepTwo(userPlans));
-      tabs[1].style.backgroundColor = " hsl(206, 94%, 87%)";
-    }
   } else if (e.target.matches("[data-user-name]")) {
     const userName = document.querySelector("[data-user-name]");
     userName.addEventListener("change", (e) => {
@@ -60,22 +47,17 @@ holder.addEventListener("click", (e) => {
         `[data-error-msg="${e.target.dataset.error}"]`
       );
 
-      userDataArray[0].name = userName.value;
       userInfo.name = userName.value;
       validateForm(userName, 0, errMsg);
-
-      save();
     });
   } else if (e.target.matches("[data-user-email]")) {
     const userEmail = document.querySelector("[data-user-email]");
-
     userEmail.addEventListener("change", (e) => {
       const errMsg = document.querySelector(
         `[data-error-msg="${e.target.dataset.error}"]`
       );
-      userDataArray[0].email = userEmail.value;
+      userInfo.email = userEmail.value;
       validateForm(userEmail, 1, errMsg);
-      save();
     });
   } else if (e.target.matches("[data-user-phone]")) {
     const userPhone = document.querySelector("[data-user-phone]");
@@ -83,9 +65,8 @@ holder.addEventListener("click", (e) => {
       `[data-error-msg="${e.target.dataset.error}"]`
     );
     userPhone.addEventListener("change", (e) => {
-      userDataArray[0].phone = userPhone.value;
+      userInfo.phone = userPhone.value;
       validateForm(userPhone, 2, errMsg);
-      save();
     });
   } // tab two events
   else if (e.target.matches(".plan-holder")) {
@@ -125,8 +106,6 @@ holder.addEventListener("click", (e) => {
       freeGifts.forEach((divs) => {
         divs.style.display = userPlans.bonus;
       });
-
-      // state(userPlans.selectedPlan, userPlans);
       changePrice(plans, userPlans);
     }
   } else if (e.target.matches("[data-tab-two-next-btn]")) {
@@ -135,9 +114,14 @@ holder.addEventListener("click", (e) => {
       holder.textContent = " ";
       holder.appendChild(functions.stepThree(userAdds));
       errMsg.textContent = "";
+      changeColor(tabs, 2); // step 3
     } else if (userPlans.selectedPlan === "") {
       errMsg.textContent = "click the cards to  select.";
     }
+  } else if (e.target.matches("[data-tab-two-back-btn]")) {
+    holder.textContent = "";
+    holder.appendChild(functions.stepOne(userInfo));
+    changeColor(tabs, 0); // step one
   }
   // tab three events
   else if (e.target.matches(".user-add")) {
@@ -147,6 +131,21 @@ holder.addEventListener("click", (e) => {
   } else if (e.target.matches("[data-tab-three-next-btn")) {
     holder.textContent = "";
     holder.appendChild(functions.stepFour(userPlans, userAdds));
+    changeColor(tabs, 3); // step 4
+  } else if (e.target.matches("[data-tab-three-back-btn]")) {
+    holder.textContent = "";
+    holder.appendChild(functions.stepTwo(userPlans));
+    selectedCard(userPlans.selectedPlan);
+    changeColor(tabs, 1); // step 2
+  }
+  // step four event
+  else if (e.target.matches("[data-tab-four-back-btn]")) {
+    holder.textContent = "";
+    holder.appendChild(functions.stepThree(userAdds));
+    changeColor(tabs, 2); // step 3
+  } else if (e.target.matches("[data-tab-four-confirm-btn]")) {
+    holder.textContent = "";
+    holder.appendChild(functions.stepFive());
   }
 });
 
@@ -155,16 +154,25 @@ tabs.forEach((element) => {
     if (tabs.indexOf(element) === 0) {
       holder.textContent = "";
       holder.appendChild(functions.stepOne(userInfo));
-    } else if (tabs.indexOf(element) === 1) {
+      changeColor(tabs, 0);
+      // next check step one is clear else don't switch
+    } else if (
+      tabs.indexOf(element) === 1 &&
+      isValueEmpty(userInfo) === false
+    ) {
       holder.textContent = "";
       holder.appendChild(functions.stepTwo(userPlans));
       selectedCard(userPlans.selectedPlan);
-    } else if (tabs.indexOf(element) === 2) {
+      changeColor(tabs, 1);
+      // check if step two cards selected to preceed to step 3 and 4 they are same
+    } else if (tabs.indexOf(element) === 2 && userPlans.selectedPlan !== "") {
       holder.textContent = "";
       holder.appendChild(functions.stepThree(userAdds));
-    } else if (tabs.indexOf(element) === 3) {
+      changeColor(tabs, 2);
+    } else if (tabs.indexOf(element) === 3 && userPlans.selectedPlan !== "") {
       holder.textContent = "";
       holder.appendChild(functions.stepFour(userPlans, userAdds));
+      changeColor(tabs, 3);
     }
   });
 });
