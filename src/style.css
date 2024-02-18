@@ -236,8 +236,7 @@ label{
         border-radius: 0.4rem;
         padding: 0.5rem;
         margin: 0.5rem;
-       
-    }
+       }
     .about-adds:hover{
         box-shadow: rgb(251, 0, 0) -1px 3px 3px;
     }
@@ -324,14 +323,11 @@ label{
         background-color: hsl(229, 24%, 87%);
         border-radius: 0.5rem;
         height: fit-content;
-       
-    }
-    
+        }
     .back-btn{
         color:hsl(231, 11%, 63%) ; 
         background-color: hsl(231, 100%, 99%);
-        
-    }
+        }
     /* step five tab*/
     .step-five{
         justify-content: center;
