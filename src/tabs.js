@@ -479,6 +479,17 @@ export function validateForm(field, index, errDom) {
   const emailReg = /\w+[@]{1}[a-z-]+[.]{1}[a-z]{2,}([.]{1}[a-z]{2,})?/;
   const phoneReg = /^[0-9]{10,15}$/;
   const stringReg = /[a-z]+/;
+  // function to hide error message on focus else show message
+  const focusStyle = function () {
+    field.addEventListener("focus", () => {
+      if (field.className === "invalid") errDom.style.display = "none";
+    });
+    field.addEventListener("focusout", () => {
+      if (field.className === "invalid") {
+        errDom.style.display = "block";
+      }
+    });
+  };
   if (field.value === "") {
     errDom.textContent = "This field is Required!";
     field.className = "invalid";
@@ -488,10 +499,11 @@ export function validateForm(field, index, errDom) {
     if (field.validity.tooShort) {
       errDom.textContent = "Too short add more character.";
       field.className = "invalid";
-      console.log("heyyy");
+      focusStyle();
     } else if (field.validity.tooLong) {
       errDom.textContent = "Too long must be 2-20 characters.";
       field.className = "invalid";
+      focusStyle();
     } else if (field.validity.valid) {
       errDom.textContent = "";
       field.className = "valid";
@@ -503,17 +515,21 @@ export function validateForm(field, index, errDom) {
     } else if (emailReg.test(field.value) === false) {
       errDom.textContent = "wrong format,use(example@domain.ext)";
       field.className = "invalid";
+      focusStyle();
     }
   } else if (index === 2) {
     if (stringReg.test(field.value)) {
       errDom.textContent = "Please enter numbers only!";
       field.className = "invalid";
+      focusStyle();
     } else if (field.validity.tooLong) {
       errDom.textContent = "Too long must be 10-15 characters";
       field.className = "invalid";
+      focusStyle();
     } else if (field.validity.tooShort) {
       errDom.textContent = "Too short must be 10-15 characters";
       field.className = "invalid";
+      focusStyle();
     } else if (phoneReg.test(Number(field.value))) {
       field.className = "valid";
       errDom.textContent = "";
