@@ -142,33 +142,33 @@ const tabTwo = function (obj) {
         <button class="plan-holder" data-plan="0">
         
             <div class="about-plan">
-                <div class="icon-holder"><img src="../src/assets/icon-arcade.svg" alt="icon for arcade plan" ></div>
+                <div class="icon-holder"><img src="../src/assets/images/icon-arcade.svg" alt="icon for arcade plan" ></div>
                 <div class="plan-detail">
                   <div class="plan-name">Arcade</div>
                   <div class="plan-fee">${obj.arcade}</div>
-                  <div class="plan-description" data-gift style='display:${obj.bonus};'>2 months fee</div>
+                  <div class="plan-description" data-gift style='display:${obj.bonus};'>2 months free</div>
                 </div>
             </div>
         </button>
         <button class="plan-holder" data-plan="1">
         
             <div class="about-plan">
-                <div class="icon-holder"><img src="../src/assets/icon-advanced.svg" alt="icon for advanced plan" ></div>
+                <div class="icon-holder"><img src="../src/assets/images/icon-advanced.svg" alt="icon for advanced plan" ></div>
                 <div class="plan-detail">
                   <div class="plan-name">Advanced</div>
                   <div class="plan-fee">${obj.advanced}</div>
-                  <div class="plan-description" data-gift style='display:${obj.bonus};'>2 months fee</div>
+                  <div class="plan-description" data-gift style='display:${obj.bonus};'>2 months free</div>
                 </div>
             </div>
         </button>
         <button class="plan-holder"  data-plan="2">
         
             <div class="about-plan">
-                <div class="icon-holder"><img src="../src/assets/icon-pro.svg" alt="icon for pro plan" ></div>
+                <div class="icon-holder"><img src="../src/assets/images/icon-pro.svg" alt="icon for pro plan" ></div>
                 <div class="plan-detail">
                   <div class="plan-name">Pro</div>
                   <div class="plan-fee">${obj.pro}</div>
-                  <div class="plan-description" data-gift style='display:${obj.bonus};' >2 months fee</div>
+                  <div class="plan-description" data-gift style='display:${obj.bonus};' >2 months free</div>
                 </div>
             </div>
         </button>
@@ -299,10 +299,28 @@ const tabFour = function (objOne, objTwo) {
         </div>
         <div class="nav-btns">
             <button class="tab-four-btn back-btn" data-tab-four-back-btn>Go Back</button>
-            <button class="tab-four-confirm" data-tab-four-confirm-btn>Confirm</button>
+            <button class="tab-four-confirm-btn" data-tab-four-confirm-btn>Confirm</button>
         </div>
  </div>`;
   div.innerHTML = summary;
+  return div;
+};
+const tabFive = function () {
+  const div = document.createElement("div");
+  const confirm = `
+     <div class="step-five">
+      <div class="icon-holder"><img src="../src/assets/images/icon-thank-you.svg" alt="right icon to confirm subscription"></div>
+      <div>
+        <h1>Thank you!</h1>
+      </div>
+      <div>
+        <p class="confirm-text">
+          Thanks for comfirming your subscription! We hope you have fun using our platform.
+          if you ever need support.please feel free to email us at support@loremgaming.com.
+        </p>
+      </div>
+   </div>`;
+  div.innerHTML = confirm;
   return div;
 };
 export const functions = {
@@ -310,6 +328,7 @@ export const functions = {
   stepTwo: tabTwo,
   stepThree: tabThree,
   stepFour: tabFour,
+  stepFive: tabFive,
 };
 /**
  * function that accept nodelist and change price according to selected plan(mpnthly or yearly)
@@ -362,7 +381,7 @@ export function isChecked(index, domElement, obj) {
   } else if (index === 0 && domElement.checked === false) {
     obj.online = "";
   } else if (index === 1 && domElement.checked === false) {
-    obj.online = "";
+    obj.storage = "";
   } else if (index === 2 && domElement.checked === false) {
     obj.theme = "";
   }
