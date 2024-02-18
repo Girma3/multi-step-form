@@ -1,7 +1,16 @@
+/* ubuntu-regular - latin */
+@font-face {
+    font-display: swap; 
+    font-family: 'Ubuntu';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./assets/fonts/ubuntu-v20-latin-regular.woff2') format('woff2'); 
+  }
 body{
-    background-color:  hsl(206, 94%, 87%);
+    background-color:  hsl(0, 0%, 100%);
     min-height: 100vh;
     max-width: 100vw;
+    font-family: 'Ubuntu';
     display: grid;
     margin: 0.5rem;
     grid-template-columns: 1fr 2fr;
@@ -10,7 +19,7 @@ body{
 /* nav style */
 
 nav{
-    background-image: url(./assets/bg-sidebar-desktop.svg);
+    background-image: url(./assets/images/bg-sidebar-desktop.svg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: bottom;
@@ -37,6 +46,9 @@ li{
     font-size: 1rem;
     font-weight: 700;
 }
+.step-name:hover{
+    text-shadow: 2px 2px  rgb(101, 5, 118);
+    }
 .dot{
     width: 2rem;
     height: 2rem;
@@ -48,8 +60,10 @@ li{
     justify-content: center;
     cursor: pointer;
     background-color: inherit;
-    
-}
+    }
+    .dot:hover{
+        border: rgb(232, 31, 247) solid 3px;
+    }
 .step-num{
     color: hsl(228, 100%, 84%);
     font-weight: 500;
@@ -58,16 +72,20 @@ h1{
     margin: 0;
     color:hsl(213, 96%, 18%);
 }
-.instruction, .plan-fee, .add-plan {
+.instruction, .plan-fee, .add-plan , .confirm-text {
     color:hsl(231, 11%, 63%) ;
     font-size: 1rem;
     font-weight: 700;
-}
+    }
+    .confirm-text{
+        font-weight: 400;
+    }
+
 .back-btn{
     color:hsl(231, 11%, 63%) ; 
 }
 /* personal info form */
-.step-one, .step-two, .tab-three, .tab-four{
+.step-one, .step-two, .tab-three, .tab-four , .step-five {
     display: flex;
     margin: 1rem;
     flex-direction: column;
@@ -75,18 +93,18 @@ h1{
     padding: 1rem;
 
      }
-  
-   
-.error-msg{
+  .error-msg{
     margin: 1px;
     width: 60%;
     color:  hsl(354, 84%, 57%);
     text-align: end;
 }
+
 .label-holder{
     display: flex;
     flex-direction: column;
     margin: 0.3rem;
+    
 }
 input{
     width: 60%;
@@ -111,14 +129,16 @@ label{
     display: flex;
     justify-content: end;
     margin-top: 3rem;
-}
-   /* tab two */
-  
-   .plans{
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    }
+  }
+    input:focus{
+        border:3px solid rgb(0, 4, 255);
+        }
+    /* tab two */
+    .plans{
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        }
    .plan-holder{
         border: 1px solid  hsl(213, 96%, 18%);
         display: flex;
@@ -201,7 +221,7 @@ label{
 
      }
     
-    .tab-two-btn, .tab-three-btn, .tab-four-btn, .tab-four-confirm , .tab-one-btn{
+    .tab-two-btn, .tab-three-btn, .tab-four-btn, .tab-four-confirm-btn , .tab-one-btn{
         padding: 1rem;
         background-color: hsl(213, 96%, 18%);
         color: azure;
@@ -219,8 +239,8 @@ label{
     .about-adds{
         border: 2px solid  hsl(243, 100%, 62%);
         border-radius: 0.4rem;
-        padding: 1rem;
-        margin: 1rem;
+        padding: 0.5rem;
+        margin: 0.5rem;
        
     }
     .about-adds:hover{
@@ -317,13 +337,25 @@ label{
         background-color: hsl(231, 100%, 99%);
         
     }
+    /* step five tab*/
+    .step-five{
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+        margin-top: 15%;
+        
+    }
+    .confirm-text{
+        text-align: center;
+    }
 @media (max-width:565px) {
     /* nav */
     body{
         grid-template-columns: 1fr;
-    }
+        background-color: hsl(206, 94%, 87%);
+        }
     nav{
-        background-image:url(./assets/bg-sidebar-mobile.svg) ;
+        background-image:url(./assets/images/bg-sidebar-mobile.svg) ;
         background-position: top;
         height: 30vh;
         width: 100vw;
@@ -337,16 +369,20 @@ label{
     /* step one */
     .step-one{
         position: absolute;
-        bottom: 22%;
+        bottom: 16%;
         border-radius: 0.5rem;
         width: 70%;
+        max-height: 490px;
     }
     input{
         width: 80%;
     }
-    .step-two, .tab-three, .tab-four{
+    .error-msg{
+        width: 100%;
+        text-align: start;
+    }
+    .step-two, .tab-three, .tab-four, .step-five{
         position: relative;
-       
         border-radius: 0.5rem;
         width: 70%;
        }
@@ -360,6 +396,10 @@ label{
         bottom: 6.4rem;
         right: 1rem;
        }
+       .step-five{
+        bottom: 10rem;
+       }
+       
     .add-header{
         gap: 0.3rem;
     }
@@ -379,16 +419,8 @@ label{
     .add-plan{
         font-weight: 500;
         font-size: 0.7rem;
-        
-       
-    }
-    
+        }
    
-    .btn-holder{
-        position: absolute;
-        top: 58vh;
-        left: 35%;
-    }
     /* step two cards */
     .plans{
         flex-wrap: wrap;
@@ -408,12 +440,13 @@ label{
     position: absolute;
     top: 28rem;
     right: 0.1rem;
-    
 }
-/* .tab-three > .nav-btns{
-    
-    right: 0.5rem;
-} */
+.btn-holder{
+    position: relative;
+    top: 2rem;
+    left: 35%;
+}
+
 .tab-four > .nav-btns{
     top: 28rem;
 }
@@ -438,7 +471,4 @@ label{
         margin: 0;
         margin-top: 3px;
     }
-    
-   
-   
 }
