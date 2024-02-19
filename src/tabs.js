@@ -1,5 +1,8 @@
 // class to hold info
-import arcadeicon from "./assets/images/icon-arcade.avg";
+import arcadeicon from "./assets/images/icon-arcade.svg";
+import proicon from "./assets/images/icon-pro.svg";
+import advancedicon from "./assets/images/icon-advanced.svg";
+import confirmicon from "./assets/images/icon-thank-you.svg";
 export class UserPersonalInfo {
   constructor(options = {}) {
     this.name = options.name || "";
@@ -93,8 +96,7 @@ const tabOne = function (obj) {
   const personalInfo = ` 
     <div class="step-one">
         <div class="form-header">
-      
-            <h1>Personal Info</h1>
+           <h1>Personal Info</h1>
             <p class="instruction">please provide your name,email adress and phone number</p>
         </div>
 
@@ -144,7 +146,7 @@ const tabTwo = function (obj) {
         <button class="plan-holder" data-plan="0">
         
             <div class="about-plan">
-                <div class="icon-holder"><img src="../src/assets/images/icon-arcade.svg" alt="icon for arcade plan" ></div>
+                <div class="icon-holder"><img src="${arcadeicon}" alt="icon for arcade plan" ></div>
                 <div class="plan-detail">
                   <div class="plan-name">Arcade</div>
                   <div class="plan-fee">${obj.arcade}</div>
@@ -155,7 +157,7 @@ const tabTwo = function (obj) {
         <button class="plan-holder" data-plan="1">
         
             <div class="about-plan">
-                <div class="icon-holder"><img src="../src/assets/images/icon-advanced.svg" alt="icon for advanced plan" ></div>
+                <div class="icon-holder"><img src="${advancedicon}" alt="icon for advanced plan" ></div>
                 <div class="plan-detail">
                   <div class="plan-name">Advanced</div>
                   <div class="plan-fee">${obj.advanced}</div>
@@ -166,7 +168,7 @@ const tabTwo = function (obj) {
         <button class="plan-holder"  data-plan="2">
         
             <div class="about-plan">
-                <div class="icon-holder"><img src="../src/assets/images/icon-pro.svg" alt="icon for pro plan" ></div>
+                <div class="icon-holder"><img src= "${proicon}" alt="icon for pro plan" ></div>
                 <div class="plan-detail">
                   <div class="plan-name">Pro</div>
                   <div class="plan-fee">${obj.pro}</div>
@@ -311,7 +313,7 @@ const tabFive = function () {
   const div = document.createElement("div");
   const confirm = `
      <div class="step-five">
-      <div class="icon-holder"><img src="../src/assets/images/icon-thank-you.svg" alt="right icon to confirm subscription"></div>
+      <div class="icon-holder"><img src="${confirmicon}" alt="icon to confirm subscription"></div>
       <div>
         <h1>Thank you!</h1>
       </div>
@@ -560,7 +562,6 @@ export function validateForm(field, index, errDom) {
       field.className = "invalid";
       focusStyle();
     } else if (phoneReg.test(Number(field.value))) {
-      console.log(field.value);
       field.className = "valid";
       errDom.textContent = "";
       const value = field.value;

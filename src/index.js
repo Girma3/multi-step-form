@@ -1,5 +1,5 @@
 import "./style.css";
-import fav from "./assets/images/favicon-32x32.png";
+
 import {
   functions,
   UserPersonalInfo,
