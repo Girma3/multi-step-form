@@ -1,4 +1,5 @@
 // class to hold info
+import arcadeicon from "./assets/images/icon-arcade.avg";
 export class UserPersonalInfo {
   constructor(options = {}) {
     this.name = options.name || "";
@@ -92,7 +93,7 @@ const tabOne = function (obj) {
   const personalInfo = ` 
     <div class="step-one">
         <div class="form-header">
-        <div class="icon-holder"><img src="../src/assets/images/icon-advanced.svg" alt="icon for advanced plan" ></div>
+      
             <h1>Personal Info</h1>
             <p class="instruction">please provide your name,email adress and phone number</p>
         </div>

@@ -20,6 +20,7 @@ body{
 
 nav{
     background-image: url(./assets/images/bg-sidebar-desktop.svg);
+    
     background-repeat: no-repeat;
     background-size: cover;
     background-position: bottom;
