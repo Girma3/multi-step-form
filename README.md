@@ -26,8 +26,8 @@ The challenge was to validate form ,keep track user selection and put summary af
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://github.com/Girma3/multi-step-form)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [https://github.com/Girma3/multi-step-form]
+- Live Site URL: [https://girma3.github.io/multi-step-form/]
 
 ## My process
 
