@@ -48,13 +48,14 @@ I learned to use constraint api to validate form more,store user selection in ob
 
 ### Continued development
 
-to practice more using class methods and separate dom element from logic,validate form.
+to practice more using class methods and separate dom element from logic,validate form and improve using webpack.
 
 ### Useful resources
 
-- [resource](https://tutorial.eyehunts.com/js/javascript-class-constructor-default-values-example-code/) - This helped me to set default value when render in html it didn't say undefined.and help me to create tabs in js and render it with out error.
-- [resource ](https://regex101.com/) - this site help me to test the reg expression I used to validate form.
+- [https://tutorial.eyehunts.com/js/javascript-class-constructor-default-values-example-code/] - This helped me to set default value when render in html it didn't say undefined.and help me to create tabs in js and render it with out error.
+- [https://regex101.com/] - this site help me to test the reg expression I used to validate form.
+- [https://webpack.js.org/guides/output-management/] - this help me to understand how to manage output.
 
 ## Author
 
-- Frontend Mentor - [(https://www.frontendmentor.io/profile/Girma3)]
+- Frontend Mentor - [https://www.frontendmentor.io/profile/Girma3]
