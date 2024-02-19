@@ -142,7 +142,7 @@ const tabTwo = function (obj) {
         <button class="plan-holder" data-plan="0">
         
             <div class="about-plan">
-                <div class="icon-holder"><img src="/src/assets/images/icon-arcade.svg" alt="icon for arcade plan" ></div>
+                <div class="icon-holder"><img src="../src/assets/images/icon-arcade.svg" alt="icon for arcade plan" ></div>
                 <div class="plan-detail">
                   <div class="plan-name">Arcade</div>
                   <div class="plan-fee">${obj.arcade}</div>
@@ -153,7 +153,7 @@ const tabTwo = function (obj) {
         <button class="plan-holder" data-plan="1">
         
             <div class="about-plan">
-                <div class="icon-holder"><img src="/src/assets/images/icon-advanced.svg" alt="icon for advanced plan" ></div>
+                <div class="icon-holder"><img src="../src/assets/images/icon-advanced.svg" alt="icon for advanced plan" ></div>
                 <div class="plan-detail">
                   <div class="plan-name">Advanced</div>
                   <div class="plan-fee">${obj.advanced}</div>
@@ -164,7 +164,7 @@ const tabTwo = function (obj) {
         <button class="plan-holder"  data-plan="2">
         
             <div class="about-plan">
-                <div class="icon-holder"><img src="/src/assets/images/icon-pro.svg" alt="icon for pro plan" ></div>
+                <div class="icon-holder"><img src="../src/assets/images/icon-pro.svg" alt="icon for pro plan" ></div>
                 <div class="plan-detail">
                   <div class="plan-name">Pro</div>
                   <div class="plan-fee">${obj.pro}</div>
