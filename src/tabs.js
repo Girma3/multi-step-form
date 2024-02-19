@@ -95,10 +95,10 @@ const tabOne = function (obj) {
   const div = document.createElement("div");
   const personalInfo = ` 
     <div class="step-one">
-        <div class="form-header">
+        <header class="form-header">
            <h1>Personal Info</h1>
             <p class="instruction">please provide your name,email adress and phone number</p>
-        </div>
+        </header>
 
         <div class="form-holder">
             <form class="personal-info-form">
