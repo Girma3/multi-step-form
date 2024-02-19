@@ -491,7 +491,7 @@ function totalPrice(obj1, obj2) {
     totalAdds += Number(price.replace(/[^0-9]/g, ""));
   });
   sum = plan + totalAdds;
-  sumwithcurrency = ` $${sum}${planName}`;
+  sumwithcurrency = ` $${sum}/${planName}`;
   return sumwithcurrency;
 }
 // function to validate step one form
