@@ -97,7 +97,7 @@ const tabOne = function (obj) {
     <div class="step-one">
         <header class="form-header">
            <h1>Personal Info</h1>
-            <p class="instruction">please provide your name,email adress and phone number</p>
+            <p class="instruction">please provide your name,email address and phone number</p>
         </header>
 
         <div class="form-holder">
@@ -108,19 +108,20 @@ const tabOne = function (obj) {
               
                     <input type="text" id="user-name" name="user-name" class='user-info' data-user-name data-error=0 minlength="2"
                     
-                  maxlength="20"  value="${obj.name}">
+                  maxlength="20"  value="${obj.name}" placeholder="Stoic">
                 </div>
                 <div class="label-holder">
-                    <label for="user-email">Email Adress</label>
+                    <label for="user-email">Email Address</label>
                      <p class="error-msg"  data-error-msg=1></p>
-                      <input type="email" id="user-email" name="user-email" class='user-info' data-user-email data-error=1  value="${obj.email}">
+                      <input type="email" id="user-email" name="user-email" class='user-info' data-user-email data-error=1  value="${obj.email}"
+                       placeholder="coolform@this.com">
                     </div>
                     
                 <div class="label-holder">
                     <label for="user-phone">Phone Number</label>
                     <p class="error-msg"  data-error-msg=2></p>
                     <input  id="user-phone" name="user-phone" class='user-info' data-user-phone data-error=2  minlength="10" maxlength="15
-                     value="${obj.phone}">
+                     value="${obj.phone}" placeholder="12 345 678">
                     
                 </div>
                 
